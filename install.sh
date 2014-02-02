@@ -4,16 +4,8 @@
 
 # Installation settings
 
-PROJECT_NAME=$1
-
 LOCAL_LOCALE=en_AU.UTF-8
 COUNTRY=au
-
-DB_NAME=${PROJECT_NAME}
-VIRTUALENV_NAME=${PROJECT_NAME}
-
-PROJECT_DIR=/home/vagrant/${PROJECT_NAME}
-VIRTUALENV_DIR=/home/vagrant/.virtualenvs/${PROJECT_NAME}
 
 PGSQL_VERSION=9.1
 POSTGIS_VERSION=2.0.4
@@ -21,7 +13,7 @@ GEOS_VERSION=3.3.9
 NODE_VERSION=0.10.25
 
 # Need to fix locale so that Postgres creates databases in UTF-8
-cp -p ${PROJECT_DIR}/etc/install/etc-bash.bashrc /etc/bash.bashrc
+cp -p /vagrant_data/etc-bash.bashrc /etc/bash.bashrc
 locale-gen ${LOCAL_LOCALE}
 dpkg-reconfigure locales
 
@@ -76,7 +68,7 @@ if ! command -v psql; then
     ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp
     ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 
-    cp ${PROJECT_DIR}/etc/install/pg_hba.conf /etc/postgresql/${PGSQL_VERSION}/main/
+    cp /vagrant_data/pg_hba.conf /etc/postgresql/${PGSQL_VERSION}/main/
     /etc/init.d/postgresql reload
 fi
 
@@ -89,8 +81,14 @@ if [[ ! -f /usr/local/bin/virtualenv ]]; then
 fi
 
 # bash environment global setup
-cp -p ${PROJECT_DIR}/etc/install/bashrc /home/vagrant/.bashrc
-su - vagrant -c "mkdir -p /home/vagrant/.pip_download_cache"
+cp -p /vagrant_data/bashrc /home/vagrant/.bashrc
+
+if [[ ! -e /home/vagrant/.pip_download_cache ]]; then
+    su - vagrant -c "mkdir -p /home/vagrant/.pip_download_cache && \
+        virtualenv /home/vagrant/yayforcaching && \
+        PIP_DOWNLOAD_CACHE=/home/vagrant/.pip_download_cache /home/vagrant/yayforcaching/bin/pip install -r /vagrant_data/common_requirements.txt --pre && \
+        rm -rf /home/vagrant/yayforcaching"
+fi
 
 # Node.js, CoffeeScript and LESS
 if ! command -v npm; then
