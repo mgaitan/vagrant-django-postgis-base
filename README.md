@@ -6,8 +6,8 @@ according to Torchbox's adopted practices. Things preinstalled beyond the base
 precise32 box include:
 
 * postgresql 9.1 (with locale fixed to create databases as UTF-8)
+* postgis 2.0.4
 * virtualenv and virtualenvwrapper
-* dependencies for PIL, the Python Imaging Library
 * a pip download cache pre-seeded with Django and various other common packages
 * git (sometimes required for pip dependencies that aren't in PyPI)
 * Node.js, CoffeeScript and LESS
