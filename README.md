@@ -19,10 +19,12 @@ instead will skip some of the time-consuming initial setup.
 
 Build instructions
 ------------------
+Optionally - Edit `./install.sh` and enter your locale and country code. Default is `en_AU-UTF-8` and `au`
+
 To generate the .box file:
 
     ./build.sh
 
 To install locally:
 
-    vagrant box add django-base-v2 django-base-v2.box
+    vagrant box add django-postgis-base-v2.1 django-postgis-base-v2.1.box

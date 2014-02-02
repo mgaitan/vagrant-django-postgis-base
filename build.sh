@@ -1,9 +1,13 @@
 #!/bin/bash
 
+BOX_NAME=django-base-postgis
+BOX_VERSION=2.1
+BOX=${BOX_NAME}-v${BOX_VERSION}
+
 # to build django-base-v2.box:
 vagrant up
-rm -f django-base-v2.1.box
-vagrant package --output django-base-v2.1.box
+rm -f ${BOX}.box
+vagrant package --output ${BOX}.box
 
 # to install locally:
-vagrant box add django-base-v2.1 django-base-v2.1.box
+vagrant box add ${BOX} ${BOX}.box
