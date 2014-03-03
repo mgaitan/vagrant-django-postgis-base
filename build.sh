@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BOX_NAME=django-base-postgis
-BOX_VERSION=2.1
+BOX_NAME=preciosa-base
+BOX_VERSION=0.1
 BOX=${BOX_NAME}-v${BOX_VERSION}
 
 vagrant up

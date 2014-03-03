@@ -10,7 +10,6 @@ COUNTRY=ar
 PGSQL_VERSION=9.1
 POSTGIS_VERSION=2.0.4
 GEOS_VERSION=3.3.9
-NODE_VERSION=0.10.25
 
 # Need to fix locale so that Postgres creates databases in UTF-8
 cp -p /vagrant_data/etc-bash.bashrc /etc/bash.bashrc
@@ -88,20 +87,4 @@ if [[ ! -e /home/vagrant/.pip_download_cache ]]; then
         virtualenv /home/vagrant/yayforcaching && \
         PIP_DOWNLOAD_CACHE=/home/vagrant/.pip_download_cache /home/vagrant/yayforcaching/bin/pip install -r /vagrant_data/common_requirements.txt --pre && \
         rm -rf /home/vagrant/yayforcaching"
-fi
-
-# Node.js, CoffeeScript and LESS
-if ! command -v npm; then
-    wget http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}.tar.gz
-    tar xzf node-v${NODE_VERSION}.tar.gz
-    cd node-v${NODE_VERSION}/
-    ./configure && make && make install
-    cd ..
-    rm -rf node-v${NODE_VERSION}/ node-v${NODE_VERSION}.tar.gz
-fi
-if ! command -v coffee; then
-    npm install -g coffee-script
-fi
-if ! command -v lessc; then
-    npm install -g less
 fi

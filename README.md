@@ -9,14 +9,13 @@ for the development of the `Preciosa <https://github.com/mgaitan/preciosa>`_ pro
 * virtualenv and virtualenvwrapper
 * a pip download cache pre-seeded with Django, more or less current dependencies of Preciosa and various other common packages
 * git (sometimes required for pip dependencies that aren't in PyPI)
-* Node.js, CoffeeScript and LESS
 
 This box will successfully build from a vanilla precise32 base box, but using vagrant-django-base instead will skip some of the time-consuming initial setup.
 
 Build instructions
 ------------------
 
-Optionally - Edit `./install.sh` and enter your locale and country code. Default is `es_AR-UTF-8` and `ar`
+Optionally - Edit `./install.sh` and enter your locale and country code
 
 To generate the .box file:
 
@@ -24,4 +23,4 @@ To generate the .box file:
 
 To install locally:
 
-    vagrant box add django-postgis-base-v2.1 django-postgis-base-v2.1.box
+    vagrant box add preciosa-base-v0.1 preciosa-base-v0.1.box
